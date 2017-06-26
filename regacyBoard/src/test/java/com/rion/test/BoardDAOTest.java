@@ -79,7 +79,7 @@ public class BoardDAOTest {
 			logger.info(boardVO.getBno() + ":  " + boardVO.getTitle());
 		}
 	}
-	*/
+	
 
 
 	@Test
@@ -95,8 +95,8 @@ public class BoardDAOTest {
 			logger.info(boardVO.getBno() + ":  " + boardVO.getTitle());
 		}
 	}
-
-	/*@Test
+*/
+	@Test
 	public void testURI() throws Exception {
 
 		UriComponents uriComponents = UriComponentsBuilder.newInstance().path("/board/read").queryParam("bno", 12)
@@ -106,7 +106,7 @@ public class BoardDAOTest {
 		logger.info(uriComponents.toString());
 
 	}
-
+	
 	@Test
 	public void testURI2() throws Exception {
 
@@ -115,6 +115,6 @@ public class BoardDAOTest {
 
 		logger.info("/board/read?bno=12&perPageNum=20");
 		logger.info(uriComponents.toString());
-	}*/
+	}
 
 }

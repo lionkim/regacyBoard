@@ -70,6 +70,13 @@ public class BoardController {
 		model.addAttribute(service.read(bno));
 	}
 
+	@RequestMapping(value = "/readPage", method = RequestMethod.GET)
+	public void read(@RequestParam("bno") int bno, @ModelAttribute("cri") Criteria cri, Model model) throws Exception {
+
+		model.addAttribute(service.read(bno));
+	}
+	
+
 	@RequestMapping(value = "/remove", method = RequestMethod.POST)
 	public String remove(@RequestParam("bno") int bno, RedirectAttributes rttr) throws Exception {
 
@@ -79,22 +86,38 @@ public class BoardController {
 
 		return "redirect:/board/listAll";
 	}
+	
 
-	@RequestMapping(value = "/modify", method = RequestMethod.GET)
-	public void modifyGET(int bno, Model model) throws Exception {
+	@RequestMapping(value = "/removePage", method = RequestMethod.POST)
+	public String remove(@RequestParam("bno") int bno, Criteria cri, RedirectAttributes rttr) throws Exception {
+
+		service.remove(bno);
+
+		rttr.addFlashAttribute("page", cri.getPage());
+		rttr.addFlashAttribute("perPageNum", cri.getPerPageNum());
+		rttr.addFlashAttribute("msg", "SUCCESS");
+
+		return "redirect:/board/listPage";
+	}
+
+	@RequestMapping(value = "/modifyPage", method = RequestMethod.GET)
+	public void modifyGET(int bno, @ModelAttribute("cri") Criteria cri, Model model) throws Exception {
 
 		model.addAttribute(service.read(bno));
 	}
 
-	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public String modifyPOST(BoardVO board, RedirectAttributes rttr) throws Exception {
+	@RequestMapping(value = "/modifyPage", method = RequestMethod.POST)
+	public String modifyPOST(BoardVO board, Criteria cri, RedirectAttributes rttr) throws Exception {
 
 		logger.info("mod post............");
 
 		service.modify(board);
+
+		rttr.addFlashAttribute("page", cri.getPage());
+		rttr.addFlashAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addFlashAttribute("msg", "SUCCESS");
 
-		return "redirect:/board/listAll";
+		return "redirect:/board/listPage";
 	}
 	
 	@RequestMapping (value ="/listCri", method = RequestMethod.GET) 
