@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.rion.domain.BoardVO;
 import com.rion.domain.Criteria;
+import com.rion.domain.PageMaker;
 import com.rion.service.BoardService;
 
 @Controller
@@ -106,6 +107,13 @@ public class BoardController {
 	@RequestMapping (value ="/listPage", method = RequestMethod.GET) 
 	public void listPage (Criteria cri, Model model) throws Exception {
 		logger.info(cri.toString());
+		
+		model.addAttribute ("list", service.listCriteria(cri));
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri (cri);
+		pageMaker.setTotalCount(service.listCountCriteria(cri));
+		
+		model.addAttribute ("pageMaker", pageMaker);
 	}
 }
 

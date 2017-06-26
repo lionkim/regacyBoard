@@ -60,12 +60,10 @@
 						<ul class="pagination">
 
 							<c:if test="${pageMaker.prev}">
-								<li><a
-									href="listPage${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
+								<li><a href="listPage${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
 							</c:if>
 
-							<c:forEach begin="${pageMaker.startPage }"
-								end="${pageMaker.endPage }" var="idx">
+							<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
 								<li
 									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
 									<a href="listPage${pageMaker.makeQuery(idx)}">${idx}</a>
@@ -73,8 +71,7 @@
 							</c:forEach>
 
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li><a
-									href="listPage${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
+								<li><a href="listPage${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
 							</c:if>
 
 						</ul>
